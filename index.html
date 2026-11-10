@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-variant="terminal">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -50,7 +50,8 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 nav ul{list-style:none;margin:0;padding:0;display:flex;gap:1.4rem}
 nav a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.95rem}
 nav a:hover,nav a[aria-current="page"]{color:var(--ink)}
-@media (max-width:560px){nav ul{gap:.9rem} nav a{font-size:.88rem} .mark span{display:none}}
+@media (max-width:560px){nav ul{gap:.75rem} nav a{font-size:.85rem} .mark span{display:none}}
+@media (max-width:430px){.mark{display:none} header.site .wrap{justify-content:center}}
 
 /* hero on graph paper */
 .hero-band{border-bottom:1px solid var(--line);
@@ -114,6 +115,15 @@ h2{font-size:1.45rem;letter-spacing:-.015em;margin:0;font-weight:600}
 .caps h3{font-size:1rem;margin:0 0 .35rem;font-weight:600}
 .caps p{margin:0;color:var(--muted);font-size:.97rem}
 
+/* projects */
+.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));gap:1.25rem}
+.project{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.2rem 1.3rem;display:flex;flex-direction:column}
+.project .when{margin-bottom:.25rem}
+.project h3{font-size:1.08rem;margin:0 0 .15rem;font-weight:600}
+.project .org{font-size:.92rem;margin:0 0 .6rem}
+.project p.desc{margin:0 0 .9rem;font-size:.97rem;flex:1}
+.tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.35rem}
+.tags li{font-family:var(--mono);font-size:.75rem;padding:.12rem .45rem;border:1px solid var(--line);border-radius:3px;color:var(--muted)}
 /* awards & certs */
 .creds{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:2rem 2.5rem}
 .creds h3{font-size:1rem;margin:0 0 .6rem;font-weight:600}
@@ -153,6 +163,36 @@ footer .wrap{font-family:var(--mono)}
 .blog-head{padding:3.5rem 0 2rem}
 .blog-head h1{font-size:clamp(2.4rem,6vw,3.8rem);letter-spacing:-.03em;margin:0 0 .6rem}
 .blog-head p{margin:0;color:var(--muted);font-size:1.15rem}
+
+/* ---------- Variant 1: Terminal ---------- */
+html:root[data-variant="terminal"]{
+  --bg:#0B0F14; --surface:#11171F; --ink:#D7DEE7; --muted:#7D8A99; --line:#1E2833;
+  --grid:rgba(215,222,231,.035); --accent:#E5B567;
+  --c1:#C678DD; --c2:#61AFEF; --c3:#56B6C2; --c4:#98C379; --c5:#E5C07B; color-scheme:dark;
+}
+[data-variant="terminal"] h1,[data-variant="terminal"] h2,[data-variant="terminal"] h3,[data-variant="terminal"] .mark{font-family:var(--mono);letter-spacing:-.01em}
+[data-variant="terminal"] .hero h1{font-size:clamp(2.3rem,6vw,4.3rem);font-weight:500}
+[data-variant="terminal"] .hero h1::after{content:"_";color:var(--accent);margin-left:.1em}
+@media (prefers-reduced-motion: no-preference){[data-variant="terminal"] .hero h1::after{animation:blink 1.1s steps(1) infinite}}
+@keyframes blink{50%{opacity:0}}
+[data-variant="terminal"] h2{font-weight:500;font-size:1.2rem}
+[data-variant="terminal"] h2::before{content:"// ";color:var(--muted)}
+[data-variant="terminal"] .org,[data-variant="terminal"] a{color:var(--accent)}
+[data-variant="terminal"] .hero-band{background-size:22px 22px}
+[data-variant="terminal"] .record{background:#0E141B}
+[data-variant="terminal"] .record dt{color:#61AFEF}
+[data-variant="terminal"] .tags li{color:#98C379;border-color:#24323F}
+@media (min-width:1000px){
+  [data-variant="terminal"] header.site{position:fixed;top:0;left:0;bottom:0;width:220px;border-bottom:0;border-right:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+  [data-variant="terminal"] header.site .wrap{flex-direction:column;align-items:flex-start;justify-content:flex-start;height:auto;padding:1.6rem 1.4rem;gap:2rem}
+  [data-variant="terminal"] .mark span{display:block;margin:.3rem 0 0}
+  [data-variant="terminal"] nav ul{flex-direction:column;gap:.15rem}
+  [data-variant="terminal"] nav a{display:block;font-family:var(--mono);font-size:.9rem;padding:.35rem 0}
+  [data-variant="terminal"] nav a::before{content:"› ";color:var(--muted)}
+  [data-variant="terminal"] main,[data-variant="terminal"] footer{margin-left:220px}
+  [data-variant="terminal"] html,[data-variant="terminal"]{scroll-padding-top:24px}
+}
+
 </style>
 </head>
 <body>
@@ -164,6 +204,7 @@ footer .wrap{font-family:var(--mono)}
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#experience">Work</a></li>
+        <li><a href="#projects">Projects</a></li>
         <li><a href="#blog" data-view-link="blog">Writing</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -179,9 +220,9 @@ footer .wrap{font-family:var(--mono)}
       <div class="hero-grid">
         <div>
           <h1>Trevor Miles</h1>
-          <p class="lede">I build the data pipelines and reporting. I’m now studying data science in London as a Chevening Scholar.</p>
+          <p class="lede">I build data systems that help organisations in Papua New Guinea make better decisions. I’m now studying data science in London as a Chevening Scholar.</p>
           <dl class="record">
-            <dt>role</dt><dd>Manager, MIS &amp; Analytics, Vodafone PNG</dd>
+            <dt>role</dt><dd>Manager, Data &amp; Analytics, Vodafone PNG</dd>
             <dt>study</dt><dd>MSc Data Science &amp; Analytics, Brunel University of London</dd>
             <dt>stack</dt><dd>Python, R, SQL, C#, Power BI, Tableau, Qlik</dd>
             <dt>based</dt><dd>London</dd>
@@ -208,10 +249,10 @@ footer .wrap{font-family:var(--mono)}
     <div class="wrap split">
       <h2>About</h2>
       <div class="prose">
-        <p>I lead the MIS &amp; Analytics team at Vodafone Papua New Guinea, where my work sits between the data warehouse and the leadership table. My team turns network, usage and commercial data into the reports the Executive Stakeholders use to run the business.</p>
-        <p>Most of that work is unglamorous and essential: SQL against Greenplum and Oracle warehouses, Python pipelines that run on schedule, and the data quality checks that make the numbers worth trusting. I care about the last step too, producing branded, readable documents rather than raw extracts.</p>
-        <p>I’ve worked in technology since 2018, starting with my own web development start-up, TwoFour Technologies, then spending nearly four years at Kina Bank as a software engineer and then a data engineer, before joining Vodafone PNG in 2023.</p>
-        <p>In September 2026 I started an MSc in Data Science and Analytics at Brunel University of London, supported by a Chevening Scholarship. I’m interested in how data and digital infrastructure can serve the Pacific, from telecom networks to cybersecurity.</p>
+        <p>I lead Data &amp; Analytics at Vodafone Papua New Guinea, overseeing the data warehouse, analytics and reporting capabilities that support business operations and executive decision-making. From network and customer intelligence to commercial performance, my team builds the data solutions that give stakeholders a clearer picture of the business.</p>
+        <p>I work across the data lifecycle, from querying and transforming large datasets in Greenplum and Oracle to developing automated Python workflows and maintaining data quality. Beyond the engineering, I focus on the end product: well-structured, visually polished reporting that transforms raw extracts into meaningful business intelligence.</p>
+        <p>My career in technology began in 2018 with the founding of TwoFour Technologies, my own web development venture. I went on to spend nearly four years at Kina Bank, progressing from software engineering into data engineering, before joining Vodafone Papua New Guinea in 2023, where I now lead Data &amp; Analytics.</p>
+        <p>In September 2026, I began an MSc in Data Science and Analytics at Brunel University of London as a Chevening Scholar. This next chapter builds on my experience in software and data, while deepening my expertise in advanced analytics and emerging technologies. I’m particularly interested in how data, digital infrastructure and technology can drive innovation, strengthen institutions and create opportunities across the Pacific.</p>
       </div>
     </div>
   </section>
@@ -224,18 +265,19 @@ footer .wrap{font-family:var(--mono)}
           <div class="when">September 2026 to September 2027</div>
           <h3>MSc Data Science and Analytics</h3>
           <p class="org">Brunel University of London, Chevening Scholar</p>
-          <p class="desc">Modules include Modern Data, Quantitative Data Analysis, Ethics and Governance of Digital Systems, and Digital Innovation &amp; Strategy.</p>
+          <p class="desc">A one-year programme spanning machine learning, quantitative methods, large-scale data infrastructure, visualisation, and the ethics and governance of digital systems.</p>
+          <ul class="tags" style="margin-top:.75rem"><li>Machine Learning</li><li>Quantitative Data Analysis &amp; Visualisation</li><li>Data Visualisation</li><li>Modern Data</li><li>High Performance Computational Infrastructures</li><li>Ethics &amp; Governance of Digital Systems</li><li>Digital Innovation &amp; Strategy</li><li>Research Project Management</li></ul>
         </li>
         <li class="now">
           <div class="when">February 2023 to present</div>
           <h3>Vodafone Papua New Guinea</h3>
           <ul class="roles">
-            <li><strong>Manager, MIS &amp; Analytics</strong><span>May 2026 to present</span></li>
-            <li>Team Leader, MIS &amp; Analytics<span>November 2025 to April 2026</span></li>
-            <li>Senior Engineer, MIS &amp; Analytics<span>July 2024 to November 2025</span></li>
-            <li>Data Analyst, MIS &amp; Analytics<span>February 2023 to June 2024</span></li>
+            <li><strong>Manager, Data &amp; Analytics</strong><span>May 2026 to present</span></li>
+            <li>Team Leader, Data &amp; Analytics<span>November 2025 to April 2026</span></li>
+            <li>Senior Engineer, Data &amp; Analytics<span>July 2024 to November 2025</span></li>
+            <li>Data Analyst, Data &amp; Analytics<span>February 2023 to June 2024</span></li>
           </ul>
-          <p class="desc">Lead the MIS &amp; Analytics function and its business intelligence strategy: data warehousing, ETL/ELT pipelines, data modelling, governance and automated executive reporting. Build and mentor the analytics team, with a focus on data quality and automation.</p>
+          <p class="desc">Lead the Data &amp; Analytics function and its business intelligence strategy: data warehousing, ETL/ELT pipelines, data modelling, governance and automated executive reporting. Build and mentor the analytics team, with a focus on data quality and automation.</p>
         </li>
         <li>
           <div class="when">June 2019 to February 2023</div>
@@ -260,17 +302,68 @@ footer .wrap{font-family:var(--mono)}
     </div>
   </section>
 
+  <section class="block" id="projects">
+    <div class="wrap split">
+      <h2>Selected projects</h2>
+      <div class="projects">
+        <article class="project">
+          <div class="when">April 2022 to February 2023</div>
+          <h3>IFRS 9 Expected Credit Loss model</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">Contributed to the bank’s IFRS 9 ECL model across its loans, overdrafts and credit card portfolios. Prepared and explored data from Oracle, PostgreSQL and MySQL databases, SharePoint lists and Excel files in SQL, then ran the probability of default, loss given default and exposure at default calculations in R, across default stages, collateral and economic scenarios.</p>
+          <ul class="tags"><li>R</li><li>SQL</li><li>Oracle</li><li>PostgreSQL</li><li>MySQL</li><li>Credit risk</li></ul>
+        </article>
+        <article class="project">
+          <div class="when">May 2021 to June 2021</div>
+          <h3>Digital Merchant Reporting Dashboard</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">Built reporting dashboards for the Merchant team to monitor EFTPOS activity and support sales and revenue growth. Data flowed from Oracle through Talend ETL into a SQL Server data warehouse, with QlikView for analysis and reporting.</p>
+          <ul class="tags"><li>QlikView</li><li>Talend</li><li>SQL Server</li><li>Oracle</li><li>Data modelling</li></ul>
+        </article>
+        <article class="project">
+          <div class="when">June 2019 to February 2023</div>
+          <h3>Kina Reporting Portal</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">Maintained and extended the bank’s internal reporting portal, built on ASP.NET and C# with JavaScript and SQL. The portal sits at the end of a low-code ETL process from Oracle sources and follows data warehousing principles.</p>
+          <ul class="tags"><li>C#</li><li>ASP.NET</li><li>JavaScript</li><li>SQL</li><li>Data warehousing</li></ul>
+        </article>
+        <article class="project">
+          <div class="when">January 2021 to February 2021</div>
+          <h3>Credit Compliance Database &amp; Application</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">An application for the business banking unit to record business customers’ assets, from bank guarantees to physical assets, and to track the expiry of leases and guarantees. Built with DevExpress and Entity Framework.</p>
+          <ul class="tags"><li>C#</li><li>ASP.NET</li><li>DevExpress</li><li>Entity Framework</li></ul>
+        </article>
+        <article class="project">
+          <div class="when">September 2019 to October 2019</div>
+          <h3>KYC Portal</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">A SharePoint portal for uploading new customer documents, with a workflow that tracks each account opening through to completion.</p>
+          <ul class="tags"><li>SharePoint</li><li>SharePoint Designer</li><li>Workflow</li></ul>
+        </article>
+        <article class="project">
+          <div class="when">September 2019 to October 2019</div>
+          <h3>Complaints Register</h3>
+          <p class="org">Kina Bank</p>
+          <p class="desc">A SharePoint register for capturing customer complaints, with a workflow that routes each complaint through stakeholders across the bank until it is resolved.</p>
+          <ul class="tags"><li>SharePoint</li><li>Workflow</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <section class="block" id="skills">
     <div class="wrap split">
       <h2>What I work with</h2>
       <div class="caps">
-        <div><h3>Data warehousing &amp; SQL</h3><p>Greenplum/PostgreSQL and Oracle, layered warehouse schemas, CDR and recharge tables.</p></div>
-        <div><h3>Python automation</h3><p>pandas, SQLAlchemy, openpyxl and xlsxwriter pipelines on a scheduled, unattended run.</p></div>
-        <div><h3>Reporting &amp; visualisation</h3><p>Branded Word and PDF reports, matplotlib charts, Tableau and Power BI.</p></div>
-        <div><h3>Telecom analytics</h3><p>Network site grading, prepaid and postpaid segmentation, channel and provincial breakdowns.</p></div>
-        <div><h3>Statistics &amp; R</h3><p>Quantitative analysis and reproducible R Markdown work through my MSc.</p></div>
-        <div><h3>App development</h3><p>Flutter applications for iOS, Android and the web, plus C# and web development.</p></div>
-        <div><h3>Stakeholder delivery</h3><p>Executive-ready reporting for Executives, plus regulatory reporting.</p></div>
+        <div><h3>Data warehousing &amp; SQL</h3><p>Greenplum/PostgreSQL, Oracle, SQL Server and MySQL. Layered warehouse design, data modelling, and ETL pipelines, including Talend.</p></div>
+        <div><h3>Python automation</h3><p>End-to-end reporting pipelines with pandas, SQLAlchemy, openpyxl and xlsxwriter, scheduled to run unattended and deliver finished reports on time.</p></div>
+        <div><h3>Reporting &amp; visualisation</h3><p>Interactive dashboards in Power BI (DAX), Tableau and QlikView, plus automatically generated, branded Word and PDF reports with matplotlib charts.</p></div>
+        <div><h3>Telecom &amp; financial analytics</h3><p>Telecoms: site grading, subscriber segmentation, and recharge and revenue performance. Banking: credit risk, merchant EFTPOS activity and credit compliance.</p></div>
+        <div><h3>Statistics &amp; R</h3><p>IFRS 9 credit loss modelling in R, from probability of default to exposure at default, with reproducible analysis in R Markdown.</p></div>
+        <div><h3>Application development</h3><p>Business applications in C#, ASP.NET and Entity Framework, SharePoint workflow solutions, and Flutter apps for iOS, Android and the web.</p></div>
+        <div><h3>Stakeholder delivery</h3><p>Monthly performance reporting for the executive team and regulatory submissions, translating complex data into clear, decision-ready insight.</p></div>
+        <div><h3>Data governance &amp; quality</h3><p>Validation checks, source reconciliation and reference data clean-up that keep warehouse data and regulatory reporting accurate and trusted.</p></div>
       </div>
     </div>
   </section>
@@ -480,7 +573,7 @@ const ROLES=[
  {role:"Data Analyst",c:4,s:"2023-02",e:"2024-06"},
  {role:"Senior Engineer",c:4,s:"2024-07",e:"2025-11"},
  {role:"Team Leader",c:4,s:"2025-11",e:"2026-04"},
- {role:"Manager, MIS & Analytics",c:4,s:"2026-05",e:null},
+ {role:"Manager, Data & Analytics",c:4,s:"2026-05",e:null},
  {role:"MSc Data Science & Analytics",c:5,s:"2026-09",e:"2027-09"}
 ];
 function drawCareer(){
@@ -523,5 +616,7 @@ renderLists();
 route();
 window.addEventListener("hashchange", route);
 </script>
+
+
 </body>
 </html>
